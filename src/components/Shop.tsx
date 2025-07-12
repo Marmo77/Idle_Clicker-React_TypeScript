@@ -25,27 +25,31 @@ interface Props {
 
 const Shop: React.FC<Props> = ({ workers, upgrades, coins, buyUpgrade, buyWorker }) => {
   return (
-    <div className="fixed right-0 top-0 h-full w-96 flex flex-row">
-      {/* Shop sidebar container */}
-      <div className="flex-1 shadow-lg bg-gray-800/95 backdrop-blur-lg border-l border-gray-700 overflow-y-auto p-6">
-        <h1 className='text-2xl font-bold mb-6 text-center text-white'>🛒 Upgrade Shop</h1>
-        <div></div>
+    <div className="flex flex-col bg-gray-800 rounded-3xl shadow-2xl p-6 h-[600px] min-w-[320px] md:min-w-[400px] lg:min-w-[480px]">
+      <h1 className="text-3xl font-bold mb-6 text-center text-white select-none">🛒 Upgrade Shop</h1>
+
+      {/* Container for the two sections side-by-side */}
+      <div className="flex flex-grow gap-6 overflow-y-auto">
+        
         {/* Click Upgrades Section */}
-        <div className="mb-8">
-          <h2 className="text-lg font-semibold mb-4 text-emerald-400 flex items-center">
+        <section className="flex flex-col flex-1 min-w-0">
+          <h2 className="text-lg font-semibold mb-4 text-emerald-400 flex items-center select-none">
             <span className="mr-2">🐭</span> Click Upgrades
           </h2>
-          <div className="space-y-3">
+          <div className="flex flex-col gap-4 overflow-y-auto">
             {upgrades.map((upgrade) => (
-              <div key={upgrade.id} className="bg-gray-700/80 hover:bg-gray-700 transition-all rounded-lg p-4">
+              <div
+                key={upgrade.id}
+                className="bg-gray-700/80 hover:bg-gray-700 transition-all rounded-xl p-4 cursor-pointer"
+              >
                 <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-bold text-white">{upgrade.name}</h3>
+                  <div className=''>
+                    <h3 className="font-bold text-wrap text-white truncate">{upgrade.name}</h3>
                     <p className="text-sm text-gray-300">+{upgrade.power} power</p>
                     <p className="text-xs text-gray-400">Owned: {upgrade.countUpgrades}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-mono font-bold text-white">
+                    <p className="font-mono text-nowrap font-bold text-white">
                       {upgrade.currentPrice} <span className="text-yellow-400">💰</span>
                     </p>
                     <button
@@ -64,19 +68,22 @@ const Shop: React.FC<Props> = ({ workers, upgrades, coins, buyUpgrade, buyWorker
               </div>
             ))}
           </div>
-        </div>
+        </section>
 
         {/* Passive Income Section */}
-        <div>
-          <h2 className="text-lg font-semibold mb-4 text-indigo-400 flex items-center">
+        <section className="flex flex-col flex-1 min-w-0">
+          <h2 className="text-lg font-semibold mb-4 text-indigo-400 flex items-center select-none">
             <span className="mr-2">♻️</span> Passive Workers
           </h2>
-          <div className="space-y-3">
+          <div className="flex flex-col gap-4 overflow-y-auto">
             {workers.map((worker) => (
-              <div key={worker.id} className="bg-indigo-900/30 hover:bg-indigo-900/50 transition-all rounded-lg p-4">
+              <div
+                key={worker.id}
+                className="bg-indigo-900/30 hover:bg-indigo-900/50 transition-all rounded-xl p-4 cursor-pointer"
+              >
                 <div className="flex justify-between items-center">
-                  <div>
-                    <h3 className="font-bold text-white">{worker.name}</h3>
+                  <div className='self-start'>
+                    <h3 className="font-bold text-white truncate">{worker.name}</h3>
                     <p className="text-sm text-gray-300">+{worker.autocoins}/s</p>
                   </div>
                   <div className="text-right">
@@ -99,10 +106,11 @@ const Shop: React.FC<Props> = ({ workers, upgrades, coins, buyUpgrade, buyWorker
               </div>
             ))}
           </div>
-        </div>
+        </section>
       </div>
     </div>
-  );
-};
+  )
+}
+
 
 export default Shop;
