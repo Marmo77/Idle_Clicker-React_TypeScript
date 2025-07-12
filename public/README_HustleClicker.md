@@ -1,0 +1,58 @@
+###########################
+------ HUSTLE CLICKER ------
+###########################
+
+🎮 **Opis minigry:**
+*Hustle Clicker* to minigra typu **idle/clicker**, zintegrowana z Hustle Garden.  
+Gracz zdobywa punkty (np. 🌱) poprzez klikanie oraz rozwijanie  
+wirtualnego ogrodu produktywności.  
+Im więcej kliknięć – tym szybciej rośnie jego "produktywność".
+
+Gra to prosta, wciągająca mechanika motywująca do działania –  
+może służyć jako nagroda lub przerwa po wykonaniu zadań.
+
+Aplikacja zawierać będzie **minigrę typu klikacz**, która pełni rolę dodatkową na stronie  
+(nie jest głównym celem aplikacji Hustle Garden).
+
+---
+
+###########################
+🧩 MVP (Minimum Viable Product):
+###########################
+
+- ✅ Jeden przycisk „Kliknij” (np. laptop / ikona pracy)
+- ✅ Licznik kliknięć (np. "Work Coins: 0")
+- ✅ Auto-click upgrade (zdobywa punkty co sekundę)
+- ✅ Upgrade'y za punkty:
+  - +1 click power (więcej punktów za kliknięcie)
+  - +1 auto-click rate (więcej punktów co sekundę)
+  - Pracownik który za ciebie zdobywa (+1 co 2 sekundy...)
+- ✅ Stylizacja podstawowa (Tailwind / CSS modules)
+- ✅ Pamięć lokalna postępu (localStorage)
+---
+
+###########################
+🔧 Rozwój (Future Features):
+###########################
+
+- 🌱 Własna postać gracza / avatar
+- ⏳ Offline income (zarabianie gdy nie grasz)
+- ⛏️ Więcej pracowników z automatycznym pozycjonowaniem ich(coś w stylu Dogeminer ->https://dogeminer2.com/play/#google_vignette)
+- 🌟 Efekty specjalne (bounce, animacje, glow przy kliknięciach)
+- 💼 Skórki przedmiotów i interfejsu (za punkty lub premium)
+- 🎖 Osiągnięcia (np. 1K kliknięć, 1M coins)
+- 🪙 Mikropłatności (np. premium currency / boostery)
+- 📊 Statystyki kliknięć, czas w grze
+- 🌐 Leaderboard globalny z innymi graczami
+
+---
+
+🛠 **Tech Stack gry:**
+- React + TypeScript
+- Zustand (stan gry)
+- Tailwind CSS
+- localStorage (Firebase później)
+
+###########################
+# KLIKASZ. ZBIERASZ. ROŚNIESZ. 💼🌿
+###########################
