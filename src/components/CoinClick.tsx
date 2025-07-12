@@ -19,40 +19,44 @@ interface CoinClickProps {
 
 const CoinClick = ({clicks, coins, clickPower, autoclickPower, theme, addCoins}: CoinClickProps) => {
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div className="text-center p-8 rounded-2xl bg-gray-700/50 backdrop-blur-sm w-full max-w-md">
-        <div className="mb-6">
-          <h1 className="text-5xl font-bold text-emerald-400 mb-2">{coins}</h1>
-          <p className="text-sm text-gray-400">coins</p>
-        </div>
-        
-        <button
-          onClick={addCoins}
-          className="relative group"
-        >
-          <div className={`absolute -inset-1 bg-emerald-400/30 rounded-full blur opacity-75 group-hover:opacity-100 transition-all duration-200`}></div>
-          <div className={`relative px-10 py-6 rounded-full ${theme.secondary} text-white text-2xl font-bold transition-all duration-300 transform group-hover:scale-105 active:scale-100`}>
-            🌱
-          </div>
-        </button>
+    <div className="flex flex-col items-center w-full">
+      
+      {/* Coins Display */}
+      <div className="flex flex-col gap-1 justify-center items-center mb-8">
+        <h1 className="text-6xl font-extrabold text-emerald-500 drop-shadow-lg">{coins}</h1>
+        <p className="text-md text-gray-500 uppercase tracking-widest">Coins</p>
+      </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-4 text-left">
-          <div className="bg-gray-700/50 p-4 rounded-xl">
-            <p className="text-sm text-gray-400">Click Power</p>
-            <p className="text-xl font-bold text-emerald-400">{clickPower}</p>
-          </div>
-          <div className="bg-gray-700/50 p-4 rounded-xl">
-            <p className="text-sm text-gray-400">Passive Income</p>
-            <p className="text-xl font-bold text-indigo-400">{autoclickPower}/s</p>
-          </div>
-          <div className="col-span-2 bg-gray-700/50 p-4 rounded-xl">
-            <p className="text-sm text-gray-400">Total Clicks</p>
-            <p className="text-xl font-bold">{clicks}</p>
-          </div>
+      {/* Click Button */}
+      <button
+        onClick={addCoins}
+        className="relative group mb-12"
+        aria-label="Click to add coins"
+      >
+        <div className="absolute -inset-2 bg-emerald-400 rounded-full blur opacity-60 group-hover:opacity-90 transition-opacity duration-300"></div>
+        <div className={`relative px-14 py-8 rounded-full ${theme.secondary} text-white text-4xl font-extrabold shadow-lg transition-transform duration-300 transform group-hover:scale-110 active:scale-95 select-none cursor-pointer`}>
+          🌱
+        </div>
+      </button>
+
+      {/* Stats Grid */}
+      <div className="w-full grid grid-cols-2 gap-6 text-left">
+        <div className="bg-gray-900 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[101%]">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Click Power</p>
+          <p className="text-2xl font-bold text-emerald-500">{clickPower}</p>
+        </div>
+        <div className="bg-gray-900 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[101%]">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Passive Income</p>
+          <p className="text-2xl font-bold text-indigo-500">{autoclickPower}/s</p>
+        </div>
+        <div className="col-span-2 bg-gray-900 rounded-2xl p-6 shadow-md hover:shadow-lg transition-shadow duration-300 hover:scale-[101%]">
+          <p className="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-1">Total Clicks</p>
+          <p className="text-2xl font-bold text-gray-200">{clicks}</p>
         </div>
       </div>
     </div>
   )
 }
+
 
 export default CoinClick;

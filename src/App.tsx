@@ -6,6 +6,7 @@ import CodeReedem from './components/CodeReedem';
 import { ToasterProvider } from './components/ToasterProvider';
 import toast from 'react-hot-toast';
 import Achievements from './components/Achievements';
+import ToggleButton from './components/ToggleButton';
 
 const defaultUpgrades = [
   { id: 'mini', name: 'Mini Soldier', basePrice: 10, power: 1, countUpgrades: 0},
@@ -101,6 +102,10 @@ function App() {
     currentPrice: Number(localStorage.getItem(`worker_${item.id}_price`) || item.basePrice),
     }))
   })
+
+  // SHOP ACHIEVEMNTS SLIDER
+  const [isShop, setIsShop] = useState<boolean>(false)
+
 
 
   // ZAPISYWANIE DO LOCAL STORAGE
@@ -300,22 +305,53 @@ function App() {
     }
   }
 
-  return (
-    <>
-      <div className={`min-h-screen ${theme.dark} ${theme.text} p-4`}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div className="lg:col-span-2">
-              <CoinClick 
-                clicks={clicks} 
-                theme={theme}
+                  {/* <div> */}
+              {/* <Shop 
+                workers={workers} 
+                upgrades={upgrades} 
                 coins={coins} 
-                clickPower={clickPower} 
-                addCoins={addCoins} 
-                autoclickPower={workerPower} 
-              />
-            </div>
-            <div className="flex flex-col bg-amber-200">
-              <div>
+                buyUpgrade={buyUpgrade} 
+                buyWorker={buyWorker} 
+              /> */}
+              {/* </div> */}
+              {/* <Achievements/> */}
+          {/*</div>
+          {/* <Reset/>
+          <CodeReedem codes={Codes} ReedemCode={ReedemCode}/>
+          <ToasterProvider/> */}
+return (
+  <>
+    <div className={`min-h-screen ${theme.dark} ${theme.text} p-6 flex justify-center items-center bg-gradient-to-br from-gray-900 via-gray-700 to-gray-900`}>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-screen-2xl items-start">
+        
+        {/* Left column: Advertisements & CodesReedems */}
+        <div className="flex justify-center items-center text-gray-300 text-center px-4">
+          Advertisements & CodesReedems
+        </div>
+
+        {/* Middle column: CoinClick */}
+        <div className="flex justify-center h-fit w-full max-w-md rounded-3xl shadow-2xl p-8 items-start bg-gray-800">
+          <CoinClick 
+            clicks={clicks} 
+            theme={theme}
+            coins={coins} 
+            clickPower={clickPower} 
+            addCoins={addCoins} 
+            autoclickPower={workerPower} 
+          />
+        </div>
+
+        {/* Right column: Shop + Buttons */}
+        <div className="flex flex-col items-center w-full min-w-[320px] md:min-w-[400px] lg:min-w-[480px]">
+          
+          {/* Buttons container - fixed height so it doesn't push Shop down */}
+          <div className="mb-4 flex fixed -mt-18 gap-4 justify-center w-full max-w-[480px]">
+           <ToggleButton isShop={isShop} setIsShop={setIsShop} />
+          </div>
+
+          {/* Shop container */}
+          <div className="h-[760px] min-w-[320px] md:min-w-[400px] lg:min-w-[480px]">
+            {isShop ? (
               <Shop 
                 workers={workers} 
                 upgrades={upgrades} 
@@ -323,18 +359,19 @@ function App() {
                 buyUpgrade={buyUpgrade} 
                 buyWorker={buyWorker} 
               />
-              </div>
-              <div>
-              <Achievements/>
-              </div>
-            </div>
+            ) : (
+              <Achievements />
+            )}
           </div>
-          <Reset/>
-          <CodeReedem codes={Codes} ReedemCode={ReedemCode}/>
-          <ToasterProvider/>
+
         </div>
-    </>
-  );
+
+      </div>
+    </div>
+  </>
+);
+
 }
+
 
 export default App;
