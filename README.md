@@ -27,6 +27,7 @@ Prerequisites: Make sure you have Node.js installed (which includes npm).
 
 ## Clone the repository:
 ```git clone https://github.com/Marmo77/TypeScriptClicker.git```
+
 ```cd TypeScriptClicker```
 ## Install dependencies:
 ```npm install```
