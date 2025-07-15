@@ -325,8 +325,28 @@ return (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-screen-2xl items-start">
         
         {/* Left column: Advertisements & CodesReedems */}
-        <div className="flex justify-center items-center text-gray-300 text-center px-4">
-          Advertisements & CodesReedems
+        <div className="flex flex-col justify-start relative text-gray-300 px-0 h-[760px] w-[320px] md:w-[400px] lg:w-[420px] rounded-3xl shadow-2xl bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 border border-gray-700 overflow-hidden">
+          {/* Header */}
+          <div className="bg-gradient-to-r from-teal-700 to-blue-700 py-4 px-8 flex items-center gap-2 shadow-md">
+            <span className="text-2xl font-bold tracking-wide text-white">🎁 Advertisements</span>
+            <span className="ml-auto text-xs bg-blue-900 px-2 py-1 rounded-full text-blue-200">Soon</span>
+          </div>
+          {/* Placeholder for advertisements */}
+          <div id="empty" className="flex flex-col items-center flex-1 justify-center py-8 px-6">
+            <div className="w-full h-full bg-gradient-to-r from-gray-700 to-gray-800 rounded-xl flex items-center justify-center text-gray-400 text-lg font-semibold border border-dashed border-gray-600">
+              No advertisements yet
+            </div>
+          </div>
+          {/* Divider */}
+          <div className="flex items-center px-8 py-2">
+            <div className="flex-grow border-t border-gray-700"></div>
+            <span className="mx-4 text-gray-400 font-semibold text-sm tracking-wider">Redeem Codes</span>
+            <div className="flex-grow border-t border-gray-700"></div>
+          </div>
+          {/* CodeReedem */}
+          <div className="flex flex-col items-center px-6 pb-6">
+            <CodeReedem codes={Codes} ReedemCode={ReedemCode} />
+          </div>
         </div>
 
         {/* Middle column: CoinClick */}
@@ -365,7 +385,7 @@ return (
           </div>
 
         </div>
-
+            <ToasterProvider/>
       </div>
     </div>
   </>

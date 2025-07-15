@@ -15,16 +15,25 @@ interface CodeReedemProps{
 
 const CodeReedem = ({codes, ReedemCode}: CodeReedemProps) => {
     const [showCodes, setShowCodes] = useState<boolean>(false)
-    const [codeValue, setCodeValue] = useState<string>()
+    const [codeValue, setCodeValue] = useState<string>("")
     return (
-    <div className='absolute flex  flex-col gap-4 left-0 bottom-24 px-12 py-2'>
-      <p className='text-center text-xl py-2'>Reedem Code:</p>
-        <form className='flex w-64 justify-between items-center border-2 rounded-2xl'>
-            <input type="text" value={codeValue} className=' py-1 px-4 border-amber-50 border-r-2 text- focus:outline-0 flex-3' id='bonuses' 
-            onChange={(e) => setCodeValue(e.target.value)}/>
-            <input type="button" value="✅" className='py-1 px-2 hover:scale-125 duration-300 transition-transform cursor-pointer flex-1'
-            onClick={(e) => {
-                e.preventDefault;
+    <div className='w-full max-w-md flex flex-col gap-4 items-center'>
+      <div className="w-full bg-gray-900 rounded-2xl shadow-lg p-6 flex flex-col gap-4 border border-gray-700">
+        <p className='text-center text-2xl font-bold text-blue-300 pb-2 tracking-wide'>Redeem a Code</p>
+        <form className='flex w-full gap-2 items-center' autoComplete="off">
+            <input
+              type="text"
+              value={codeValue}
+              className='flex-1 py-2 px-4 rounded-l-xl bg-gray-800 border border-gray-700 text-blue-200 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition'
+              id='bonuses'
+              placeholder="Enter code..."
+              onChange={(e) => setCodeValue(e.target.value)}
+            />
+            <button
+              type="submit"
+              className='py-2 px-4 rounded-r-xl bg-gradient-to-r from-blue-600 to-teal-500 text-white font-semibold hover:scale-105 hover:from-blue-700 hover:to-teal-600 transition-transform duration-200 shadow'
+              onClick={(e) => {
+                e.preventDefault();
                 if (codeValue) {
                     ReedemCode(codeValue);
                     setCodeValue("")
@@ -40,27 +49,37 @@ const CodeReedem = ({codes, ReedemCode}: CodeReedemProps) => {
                             },
                             duration: 2000,
                         }
-                        
                     )
                 }
-            }}
-            />
+              }}
+            >
+              <span className="text-xl">✅</span>
+            </button>
         </form>
-        <button className='px-4 py-2 mt-2 w-48 self-center rounded-3xl cursor-pointer hover:scale-105 bg-teal-800'
-        onClick={() => setShowCodes(!showCodes)}>
-            {showCodes ? 'Hide all codes': 'Show all codes'}
+        <button
+          className={`mt-2 w-full py-2 rounded-xl font-semibold transition-colors duration-200 ${
+            showCodes
+              ? 'bg-gradient-to-r from-blue-700 to-teal-700 text-white'
+              : 'bg-gray-800 text-blue-300 border border-blue-700 hover:bg-blue-800'
+          }`}
+          onClick={() => setShowCodes(!showCodes)}
+        >
+          {showCodes ? 'Hide all codes' : 'Show all codes'}
         </button>
-        <div className={`${showCodes ? 'flex flex-col text-blue-500': 'hidden'}`}>
-            <ul className='flex-col flex items-start'>
-                {showCodes && (
-                    codes.map((item) => (
-                        <li key={item.id}>
-                            <p>Code: <span className='text-blue-300'>{item.code}</span>, For: <span className='text-blue-300'>{item.category},</span> value: <span className='text-blue-300'>{item.value}</span></p>
-                        </li>
-                    ))
-                )}
-            </ul>
+        <div className={`${showCodes ? 'flex flex-col mt-2' : 'hidden'}`}>
+          <ul className='flex flex-col gap-2 items-start max-h-48 overflow-y-auto'>
+            {codes.map((item) => (
+              <li key={item.id} className="w-full bg-gray-800 rounded-lg px-4 py-2 border border-gray-700">
+                <span className='font-semibold text-blue-400'>Code:</span> <span className='text-blue-200'>{item.code}</span>
+                <span className='mx-2 text-gray-400'>|</span>
+                <span className='font-semibold text-blue-400'>For:</span> <span className='text-blue-200'>{item.category}</span>
+                <span className='mx-2 text-gray-400'>|</span>
+                <span className='font-semibold text-blue-400'>Value:</span> <span className='text-blue-200'>{item.value}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+      </div>
     </div>
   )
 }
