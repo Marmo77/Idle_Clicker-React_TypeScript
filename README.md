@@ -30,9 +30,9 @@ It also use "react-hot-toast" for notifications in *Code Reedem* so its more Use
 
 ### Features: 🔨
 
-- Achievements system 🔨 
+- Achievements system ✅
 - More stats *seperated buttons*- (time in game, collected money, etc.) ❌
-- Bigger shop (more options) ❌
+- Bigger shop (more options) 🔨
 - User Database - Profiles, Login/Signin. ❌
 - Global Leaderboard with other Users. ❌
 
