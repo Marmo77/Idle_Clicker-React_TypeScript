@@ -9,7 +9,7 @@ It's made in React and TypeScript elements. Using *useState* for variables like 
 *localStorage* for a saving data without using databases. *useEffect* for updating data on change of variable.
 It also use "react-hot-toast" for notifications in *Code Reedem* so its more User Friendly then alerts.
 
-![Game_screenshot/snippet]([http://url/to/img.png](https://github.com/Marmo77/Idle_Clicker-React_TypeScript/blob/main/public/Idle-clicker-typescript.png))
+![Game_screenshot/snippet](https://github.com/Marmo77/Idle_Clicker-React_TypeScript/blob/main/public/Idle-clicker-typescript.png)
 
 
 ### Key Features
