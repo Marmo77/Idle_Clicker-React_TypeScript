@@ -7,6 +7,8 @@ import { ToasterProvider } from './components/ToasterProvider';
 import toast from 'react-hot-toast';
 import Achievements from './components/Achievements';
 import ToggleButton from './components/ToggleButton';
+import Advertisements from './components/Advertisements';
+import { achievementsList, loadAchievementStatus, saveAchievementStatus } from './store/achievements';
 
 const defaultUpgrades = [
   { id: 'mini', name: 'Mini Soldier', basePrice: 10, power: 1, countUpgrades: 0},
@@ -86,6 +88,40 @@ function App() {
   const [clickPower, setClickPower] = useState<number>(Number(localStorage.getItem("clickPower")) || 1);
   const [workerPower, setWorkerpower] = useState<number>(Number(localStorage.getItem("autoclickPower")) || 0)
   const [clicks, setClicks] = useState<number>(Number(localStorage.getItem("clicks")) || 0);
+
+
+  // ACHIEVEMENTS
+  const [achievementStatus, setAchievementStatus] = useState<boolean[]>(loadAchievementStatus());
+    // Save achievement status when it changes
+  useEffect(() => {
+    saveAchievementStatus(achievementStatus);
+  }, [achievementStatus]);
+
+  // check achievements based on game state
+  const checkAchievement = (id:number) => {
+      const updated = [...achievementStatus];
+      updated[id] = true;
+      setAchievementStatus(updated);
+  }
+    useEffect(() => {
+    if (clicks >= 1 && !achievementStatus[0]) checkAchievement(0);
+    if (coins >= 100 && !achievementStatus[1]) checkAchievement(1);
+    if (workerPower >= 1 && !achievementStatus[2]) checkAchievement(2);
+    if (clickPower >= 50 && !achievementStatus[3]) checkAchievement(3);
+    if (workerPower >= 50 && !achievementStatus[4]) checkAchievement(4);
+    if (clickPower >= 150 && !achievementStatus[5]) checkAchievement(5);
+    if (Number(localStorage.getItem("upgrade_mini_count")) >= 40 && !achievementStatus[6]) checkAchievement(6);
+    if (clicks >= 1000 && !achievementStatus[7]) checkAchievement(7);
+    if (coins >= 50000 && !achievementStatus[8]) checkAchievement(8);
+
+    // Add more checks for other achievements...
+  }, [clicks, workerPower, clickPower,achievementStatus]);
+
+    // Pass achievements with status to Achievements component
+  const achievementsWithStatus = achievementsList.map((ach, idx) => ({
+    ...ach, achieved: achievementStatus[idx]
+  }));
+
   // Initialize upgrades with base prices
   const [upgrades, setUpgrades] = useState(() => {
     return defaultUpgrades.map(item => ({
@@ -332,11 +368,7 @@ return (
             <span className="ml-auto text-xs bg-blue-900 px-2 py-1 rounded-full text-blue-200">Soon</span>
           </div>
           {/* Placeholder for advertisements */}
-          <div id="empty" className="flex flex-col items-center flex-1 justify-center py-8 px-6">
-            <div className="w-full h-full bg-gradient-to-r from-gray-700 to-gray-800 rounded-xl flex items-center justify-center text-gray-400 text-lg font-semibold border border-dashed border-gray-600">
-              No advertisements yet
-            </div>
-          </div>
+          <Advertisements alttext="No advertisements yet" />
           {/* Divider */}
           <div className="flex items-center px-8 py-2">
             <div className="flex-grow border-t border-gray-700"></div>
@@ -344,8 +376,12 @@ return (
             <div className="flex-grow border-t border-gray-700"></div>
           </div>
           {/* CodeReedem */}
-          <div className="flex flex-col items-center px-6 pb-6">
+          <div className="flex flex-col items-center px-6 pb-2">
             <CodeReedem codes={Codes} ReedemCode={ReedemCode} />
+          </div>
+          {/* RESET BUTTON */}
+          <div className="flex justify-center px-6 py-3">
+            <Reset/>
           </div>
         </div>
 
@@ -380,7 +416,7 @@ return (
                 buyWorker={buyWorker} 
               />
             ) : (
-              <Achievements />
+              <Achievements achievements={achievementsWithStatus} />
             )}
           </div>
 
